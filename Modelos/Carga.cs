@@ -22,7 +22,6 @@ namespace API_Camiones.Modelos
         [Required]
         public double Iva { get; set; }
         [Required]
-        public string? SubtotalString { get; set; }
         public bool? Borrado { get; set; }
     }
 }
