@@ -1,0 +1,6 @@
+@API_Camiones_HostAddress = http://localhost:5095
+
+GET {{API_Camiones_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
