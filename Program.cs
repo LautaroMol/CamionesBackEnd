@@ -1,5 +1,6 @@
 using API_Camiones.Data;
 using Microsoft.EntityFrameworkCore;
+using LoginAFip;
 
 var builder = WebApplication.CreateBuilder(args);
 
