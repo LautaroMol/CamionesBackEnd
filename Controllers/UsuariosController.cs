@@ -17,7 +17,6 @@ namespace API_Camiones.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        LoginCMSClient _afip = new LoginCMSClient;
 
         public UsuariosController(ApplicationDbContext context)
         {
@@ -83,11 +82,7 @@ namespace API_Camiones.Controllers
         {
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
-            try
-            {
-                DateTime fecha = _afip.GetNetworkTime();
-            }
-            catch { }
+
 
             return CreatedAtAction("GetUsuario", new { id = usuario.Idusuario }, usuario);
         }

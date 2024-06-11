@@ -13,12 +13,11 @@ namespace API_Camiones.Modelos
         [Required]
         public List<int>? Gastos { get; set; }
         [Required]
-        public int? Carga { get; set; }
-        [Required]
         public DateOnly Fecha { get; set; }
         [Required]
         public int Cp { get; set; }
         public bool Facturado { get; set; }
+        public int CuitUsuario { get; set; }
         [Required]
         public int Distancia { get; set; }
         [Required]

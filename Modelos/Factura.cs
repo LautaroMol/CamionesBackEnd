@@ -7,9 +7,9 @@ namespace API_Camiones.Modelos
         [Key]
         public int Idfactura { get; set; }
         [Required]
-        public List<int> Usuarios { get; set; }
+        public int Usuario { get; set; }
         [Required]
-        public List<int> Clientes { get; set; }
+        public int Cliente { get; set; }
         [Required]
         public List<int> Cargas { get; set; }
         [Required]

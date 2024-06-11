@@ -23,5 +23,6 @@ namespace API_Camiones.Modelos
         public double Iva { get; set; }
         [Required]
         public bool? Borrado { get; set; }
+        public int IdViaje { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace API_Camiones.Modelos
         public string Condicion { get; set; } = null!;
         [Required]
         public string Cuit { get; set; } = null!;
-        public List<int>? Viajes { get; set; }
         public List<int>? Facturas { get; set; }
         public bool? Borrado { get; set; }
 
