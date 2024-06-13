@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_Camiones.Modelos
 {
     public class Carga
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 1)]
         public int Idcarga { get; set; }
         [Required]
         public int Codigo { get; set; }

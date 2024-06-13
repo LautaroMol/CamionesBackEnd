@@ -92,7 +92,8 @@ namespace API_Camiones.Migrations
                 {
                     b.Property<int>("Idcliente")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idcliente"));
 

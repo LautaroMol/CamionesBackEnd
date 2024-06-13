@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Camiones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240611003043_correcciones")]
-    partial class correcciones
+    [Migration("20240613020354_test+")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,7 +95,8 @@ namespace API_Camiones.Migrations
                 {
                     b.Property<int>("Idcliente")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idcliente"));
 

@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_Camiones.Modelos
 {
     public class Gasto
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 1)]
         public int Idgasto { get; set; }
         public required string Nombre { get; set; }
         [Required]

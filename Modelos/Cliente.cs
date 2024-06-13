@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_Camiones.Modelos
 {
     public class Cliente
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Column(Order = 1)]
         public int Idcliente { get; set; }
         [Required]
         public string RazonSoc { get; set; } = null!;
