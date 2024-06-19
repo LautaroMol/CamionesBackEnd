@@ -26,7 +26,7 @@ namespace API_Camiones.Interfaces_y_Repo
         }
         public async Task<Carga> Add(Carga modelo)
         {
-            await _dbContext.AddAsync(modelo);
+            await _dbContext.Cargas.AddAsync(modelo);
             await _dbContext.SaveChangesAsync();
             return modelo;
         }
@@ -44,7 +44,7 @@ namespace API_Camiones.Interfaces_y_Repo
                 await _dbContext.SaveChangesAsync();
                 return true;
 
-            }catch (Exception ex) { return false; }
+            }catch { return false; }
         }
 
         public async Task<bool> Update(Carga modelo)
@@ -59,7 +59,7 @@ namespace API_Camiones.Interfaces_y_Repo
                 _dbContext.Cargas.Update(carga);
                 await _dbContext.SaveChangesAsync();
                 return true;
-            }catch (Exception ex) { return false; }
+            }catch { return false; }
         }
     }
 }

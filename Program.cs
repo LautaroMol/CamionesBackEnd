@@ -1,6 +1,9 @@
 using API_Camiones.Data;
 using Microsoft.EntityFrameworkCore;
 using LoginAFip;
+using API_Camiones.DTOs;
+using API_Camiones.Interfaces_y_Repo;
+using API_Camiones.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
+builder.Services.AddScoped<ICarga, CargaRepositorio>();
+builder.Services.AddScoped<ICategoria, CategoriaRepositorio>();
+builder.Services.AddScoped<ICliente, ClienteRepositorio>();
+builder.Services.AddScoped<IFactura, FacturaRepositorio>();
+builder.Services.AddScoped<IGasto,GastoRepositorio>();
 
 var app = builder.Build();
 
