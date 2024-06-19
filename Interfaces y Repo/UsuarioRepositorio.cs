@@ -1,6 +1,7 @@
 ﻿using API_Camiones.Data;
 using API_Camiones.Interfaces;
 using API_Camiones.Modelos;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_Camiones.Interfaces_y_Repo
 {
@@ -11,26 +12,51 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             _dbContext = dbContext;
         }
-        public Task<Usuario> GetId(int IdUsuario)
+        public async Task<Usuario> GetId(int IdUsuario)
         {
-            throw new NotImplementedException();
+            Usuario usuario = await _dbContext.Usuarios.FindAsync(IdUsuario);
+            return usuario;
         }
-        public Task<List<Usuario>> GetList()
+        public async Task<List<Usuario>> GetList()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Usuarios.ToListAsync();
         }
-        public Task<Usuario> Add(Usuario modelo)
+        public async Task<Usuario> Add(Usuario modelo)
         {
-            throw new NotImplementedException();
+            await _dbContext.Usuarios.AddAsync(modelo);
+            await _dbContext.SaveChangesAsync();
+            return modelo;
         }
 
-        public Task<bool> Delete(Usuario modelo)
+        public async Task<bool> Delete(Usuario modelo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Usuario usuario = await _dbContext.Usuarios.FindAsync(modelo.Idusuario);
+                if (usuario == null)
+                {
+                    return false;
+                }
+                _dbContext.Remove(usuario);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch { return false; }
         }
-        public Task<bool> Update(Usuario modelo)
+        public async Task<bool> Update(Usuario modelo)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Usuario usuario = await _dbContext.Usuarios.FindAsync(modelo.Idusuario);
+                if (usuario == null)
+                {
+                    return false;
+                }
+                _dbContext.Update(usuario);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

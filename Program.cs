@@ -20,6 +20,8 @@ builder.Services.AddScoped<ICategoria, CategoriaRepositorio>();
 builder.Services.AddScoped<ICliente, ClienteRepositorio>();
 builder.Services.AddScoped<IFactura, FacturaRepositorio>();
 builder.Services.AddScoped<IGasto,GastoRepositorio>();
+builder.Services.AddScoped<IUsuario, UsuarioRepositorio>();
+builder.Services.AddScoped<IViaje, ViajeRepositorio>();
 
 var app = builder.Build();
 
