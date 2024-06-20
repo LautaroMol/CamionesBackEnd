@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using API_Camiones.Data;
 using API_Camiones.Modelos;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using LoginAFip;
 
 namespace API_Camiones.Controllers
 {

@@ -1,4 +1,5 @@
 ﻿using API_Camiones.Modelos;
+using API_Camiones.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_Camiones.Data
@@ -7,7 +8,7 @@ namespace API_Camiones.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Carga> Cargas { get; set; }
@@ -17,5 +18,6 @@ namespace API_Camiones.Data
         public DbSet<Gasto> Gastos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Viaje> Viajes { get; set; }
+
     }
 }

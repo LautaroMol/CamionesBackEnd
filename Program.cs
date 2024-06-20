@@ -1,27 +1,39 @@
 using API_Camiones.Data;
 using Microsoft.EntityFrameworkCore;
-using LoginAFip;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using API_Camiones.DTOs;
-using API_Camiones.Interfaces_y_Repo;
 using API_Camiones.Interfaces;
+using API_Camiones.Interfaces_y_Repo;
+using API_Camiones.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
+
+// Add DbContext
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
+
+// Register repositories
 builder.Services.AddScoped<ICarga, CargaRepositorio>();
 builder.Services.AddScoped<ICategoria, CategoriaRepositorio>();
 builder.Services.AddScoped<ICliente, ClienteRepositorio>();
 builder.Services.AddScoped<IFactura, FacturaRepositorio>();
-builder.Services.AddScoped<IGasto,GastoRepositorio>();
+builder.Services.AddScoped<IGasto, GastoRepositorio>();
 builder.Services.AddScoped<IUsuario, UsuarioRepositorio>();
 builder.Services.AddScoped<IViaje, ViajeRepositorio>();
+
+// Register AfipService with configuration
+var afipConfig = builder.Configuration.GetSection("AfipConfig");
+var certificadoPath = afipConfig["CertificadoPath"];
+var certificadoPassword = afipConfig["CertificadoPassword"];
+builder.Services.AddSingleton(new AfipService(certificadoPath, certificadoPassword));
 
 var app = builder.Build();
 
@@ -33,7 +45,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();
