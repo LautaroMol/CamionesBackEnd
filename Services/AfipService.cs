@@ -1,4 +1,5 @@
 ﻿using LoginAFIP;
+using ServiceAfip;
 using System;
 using System.Net;
 using System.Security.Cryptography;
@@ -62,18 +63,42 @@ namespace API_Camiones.Services
             var response = await client.loginCmsAsync(traFirmado);
             return response.loginCmsReturn;
         }
-        public bool ValidarCertificado()
+        public (bool esValido, DateTime? fechaVencimiento, string detallesCadena) ValidarCertificado()
         {
             try
             {
                 X509Certificate2 cert = new X509Certificate2(CertificadoPath, CertificadoPassword);
-                return true;
+
+                // Verificar la fecha de vencimiento
+                DateTime fechaVencimiento = cert.NotAfter;
+                bool estaVencido = fechaVencimiento < DateTime.Now;
+
+                // Validar la cadena de certificación
+                X509Chain chain = new X509Chain();
+                chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck; // Deshabilitar verificación de revocación
+                chain.ChainPolicy.RevocationFlag = X509RevocationFlag.EntireChain;
+                chain.ChainPolicy.UrlRetrievalTimeout = new TimeSpan(0, 1, 0);
+                chain.ChainPolicy.VerificationFlags = X509VerificationFlags.NoFlag;
+
+                bool cadenaValida = chain.Build(cert);
+
+                string detallesCadena = "La cadena de certificación es válida.";
+                if (!cadenaValida)
+                {
+                    detallesCadena = "La cadena de certificación no es válida:";
+                    foreach (X509ChainStatus status in chain.ChainStatus)
+                    {
+                        detallesCadena += $"\n - {status.StatusInformation}";
+                    }
+                }
+
+                // Retorna si el certificado es válido, la fecha de vencimiento y los detalles de la cadena
+                return (!estaVencido && cadenaValida, fechaVencimiento, detallesCadena);
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine($"Error al validar el certificado: {ex.Message}");
-                return false;
+                return (false, null, $"Error: {ex.Message}");
             }
         }
     }

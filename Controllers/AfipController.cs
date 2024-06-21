@@ -23,14 +23,14 @@ public class AfipController : ControllerBase
     [HttpGet("validarCertificado")]
     public IActionResult ValidarCertificado()
     {
-        try
+        var resultado = _afipService.ValidarCertificado();
+        var (esValido, fechaVencimiento, detallesCadena) = resultado;
+
+        if (!esValido)
         {
-            bool certificadoValido = _afipService.ValidarCertificado();
-            return Ok(certificadoValido ? "El certificado es válido" : "El certificado no es válido");
+            return BadRequest(new { Mensaje = "El certificado no es válido.", DetallesCadena = detallesCadena });
         }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Error al validar el certificado: {ex.Message}");
-        }
+
+        return Ok(new { Mensaje = "El certificado es válido.", FechaVencimiento = fechaVencimiento, DetallesCadena = detallesCadena });
     }
 }

@@ -18,6 +18,5 @@ namespace API_Camiones.Modelos
         public string Cuit { get; set; } = null!;
         public List<int>? Facturas { get; set; }
         public bool? Borrado { get; set; }
-
     }
 }
