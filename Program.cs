@@ -31,11 +31,13 @@ builder.Services.AddSingleton(new AfipService(certificadoPath, certificadoPasswo
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("Nueva", app =>
+    options.AddPolicy("politicaNueva", builder =>
     {
-        app.AllowAnyOrigin();
-        app.AllowAnyHeader();
-        app.AllowAnyMethod();
+        builder
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
@@ -377,6 +379,6 @@ app.MapDelete("viaje/delete/{id}", async (int id, IViaje _viajeService) =>
 
 #endregion // Viaje
 
-app.UseCors("Nueva");
+app.UseCors("politicaNueva"); 
 app.MapControllers();
 app.Run();
