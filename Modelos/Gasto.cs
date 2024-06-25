@@ -7,7 +7,7 @@ namespace API_Camiones.Modelos
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 1)]
-        public int Idgasto { get; set; }
+        public int IdGasto { get; set; }
         public required string Nombre { get; set; }
         [Required]
         public double Cantidad { get; set; }

@@ -33,7 +33,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Cliente cliente = await _dbContext.Clientes.FindAsync(modelo.Idcliente);
+                Cliente cliente = await _dbContext.Clientes.FindAsync(modelo.IdCliente);
                 if (cliente == null)
                 {
                     return false;
@@ -49,7 +49,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Cliente cliente = await _dbContext.Clientes.FindAsync(modelo.Idcliente);
+                Cliente cliente = await _dbContext.Clientes.FindAsync(modelo.IdCliente);
                 if (cliente == null)
                 {
                     return false;

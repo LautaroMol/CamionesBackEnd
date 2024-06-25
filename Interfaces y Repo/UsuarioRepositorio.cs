@@ -32,7 +32,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Usuario usuario = await _dbContext.Usuarios.FindAsync(modelo.Idusuario);
+                Usuario usuario = await _dbContext.Usuarios.FindAsync(modelo.IdUsuario);
                 if (usuario == null)
                 {
                     return false;
@@ -47,7 +47,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Usuario usuario = await _dbContext.Usuarios.FindAsync(modelo.Idusuario);
+                Usuario usuario = await _dbContext.Usuarios.FindAsync(modelo.IdUsuario);
                 if (usuario == null)
                 {
                     return false;

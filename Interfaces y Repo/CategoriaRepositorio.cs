@@ -35,7 +35,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Categoria categoria = await _dbContext.Categorias.FindAsync(modelo.Idcategoria);
+                Categoria categoria = await _dbContext.Categorias.FindAsync(modelo.IdCategoria);
                 if (categoria == null)
                 {
                     return false;
@@ -52,7 +52,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Categoria categoria = await _dbContext.Categorias.FindAsync(modelo.Idcategoria);
+                Categoria categoria = await _dbContext.Categorias.FindAsync(modelo.IdCategoria);
                 if (categoria == null)
                 {
                     return false;

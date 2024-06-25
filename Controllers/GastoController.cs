@@ -47,7 +47,7 @@ namespace API_Camiones.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGasto(int id, Gasto gasto)
         {
-            if (id != gasto.Idgasto)
+            if (id != gasto.IdGasto)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace API_Camiones.Controllers
             _context.Gastos.Add(gasto);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGasto", new { id = gasto.Idgasto }, gasto);
+            return CreatedAtAction("GetGasto", new { id = gasto.IdGasto }, gasto);
         }
 
         // DELETE: api/Gasto/5
@@ -102,7 +102,7 @@ namespace API_Camiones.Controllers
 
         private bool GastoExists(int id)
         {
-            return _context.Gastos.Any(e => e.Idgasto == id);
+            return _context.Gastos.Any(e => e.IdGasto == id);
         }
     }
 }

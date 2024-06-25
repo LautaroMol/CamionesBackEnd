@@ -7,7 +7,7 @@ namespace API_Camiones.Modelos
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 1)]
-        public int Idcliente { get; set; }
+        public int IdCliente { get; set; }
         [Required]
         public string RazonSoc { get; set; } = null!;
         [Required]
@@ -15,7 +15,7 @@ namespace API_Camiones.Modelos
         [Required]
         public string Condicion { get; set; } = null!;
         [Required]
-        public string Cuit { get; set; } = null!;
+        public string CuitCliente { get; set; } = null!;
         public bool? Borrado { get; set; }
 
     }

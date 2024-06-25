@@ -47,7 +47,7 @@ namespace API_Camiones.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutViaje(int id, Viaje viaje)
         {
-            if (id != viaje.Idviaje)
+            if (id != viaje.IdViaje)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace API_Camiones.Controllers
             _context.Viajes.Add(viaje);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetViaje", new { id = viaje.Idviaje }, viaje);
+            return CreatedAtAction("GetViaje", new { id = viaje.IdViaje }, viaje);
         }
 
         // DELETE: api/Viajes/5
@@ -102,7 +102,7 @@ namespace API_Camiones.Controllers
 
         private bool ViajeExists(int id)
         {
-            return _context.Viajes.Any(e => e.Idviaje == id);
+            return _context.Viajes.Any(e => e.IdViaje == id);
         }
     }
 }

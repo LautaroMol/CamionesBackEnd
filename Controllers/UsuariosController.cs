@@ -48,7 +48,7 @@ namespace API_Camiones.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
         {
-            if (id != usuario.Idusuario)
+            if (id != usuario.IdUsuario)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace API_Camiones.Controllers
             await _context.SaveChangesAsync();
 
 
-            return CreatedAtAction("GetUsuario", new { id = usuario.Idusuario }, usuario);
+            return CreatedAtAction("GetUsuario", new { id = usuario.IdUsuario }, usuario);
         }
 
         // DELETE: api/Usuarios/5
@@ -104,7 +104,7 @@ namespace API_Camiones.Controllers
 
         private bool UsuarioExists(int id)
         {
-            return _context.Usuarios.Any(e => e.Idusuario == id);
+            return _context.Usuarios.Any(e => e.IdUsuario == id);
         }
     }
 }

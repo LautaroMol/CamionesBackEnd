@@ -31,7 +31,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Gasto gasto = await _dbContext.Gastos.FindAsync(modelo.Idgasto);
+                Gasto gasto = await _dbContext.Gastos.FindAsync(modelo.IdGasto);
                 if (gasto == null)
                 {
                     return false;
@@ -45,7 +45,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Gasto gasto = await _dbContext.Gastos.FindAsync(modelo.Idgasto);
+                Gasto gasto = await _dbContext.Gastos.FindAsync(modelo.IdGasto);
                 if (gasto == null)
                 {
                     return false;

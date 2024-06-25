@@ -33,7 +33,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Factura factura = await _dbContext.Facturas.FindAsync(modelo.Idfactura);
+                Factura factura = await _dbContext.Facturas.FindAsync(modelo.IdFactura);
                 if (factura == null)
                 {
                     return false;
@@ -50,7 +50,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Factura factura = await _dbContext.Facturas.FindAsync(modelo.Idfactura);
+                Factura factura = await _dbContext.Facturas.FindAsync(modelo.IdFactura);
                 if (factura == null)
                 {
                     return false;

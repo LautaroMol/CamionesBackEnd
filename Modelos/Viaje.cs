@@ -7,7 +7,7 @@ namespace API_Camiones.Modelos
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 1)]
-        public int Idviaje { get; set; }
+        public int IdViaje { get; set; }
         [Required]
         public string Inicio { get; set; } = null!;
         [Required]

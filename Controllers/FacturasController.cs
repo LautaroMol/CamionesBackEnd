@@ -47,7 +47,7 @@ namespace API_Camiones.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFactura(int id, Factura factura)
         {
-            if (id != factura.Idfactura)
+            if (id != factura.IdFactura)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace API_Camiones.Controllers
             _context.Facturas.Add(factura);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFactura", new { id = factura.Idfactura }, factura);
+            return CreatedAtAction("GetFactura", new { id = factura.IdFactura }, factura);
         }
 
         // DELETE: api/Facturas/5
@@ -102,7 +102,7 @@ namespace API_Camiones.Controllers
 
         private bool FacturaExists(int id)
         {
-            return _context.Facturas.Any(e => e.Idfactura == id);
+            return _context.Facturas.Any(e => e.IdFactura == id);
         }
     }
 }

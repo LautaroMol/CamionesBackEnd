@@ -68,7 +68,7 @@ app.MapGet("carga/{id}", async (int id, ICarga _cargaService) =>
 app.MapPost("carga/add", async ([FromBody] Carga modelo, ICarga _cargaService) =>
 {
     var carga = await _cargaService.Add(modelo);
-    return Results.Created($"/carga/{carga.Idcarga}", carga);
+    return Results.Created($"/carga/{carga.IdCarga}", carga);
 });
 
 app.MapPut("carga/update/{id}", async (int id, [FromBody] Carga modelo, ICarga _cargaService) =>
@@ -116,7 +116,7 @@ app.MapGet("categoria/{id}", async (int id, ICategoria _categoriaService) =>
 app.MapPost("categoria/add", async ([FromBody] Categoria nuevaCategoria, ICategoria _categoriaService) =>
 {
     var categoriaAgregada = await _categoriaService.Add(nuevaCategoria);
-    return Results.Created($"/categoria/{categoriaAgregada.Idcategoria}", categoriaAgregada);
+    return Results.Created($"/categoria/{categoriaAgregada.IdCategoria}", categoriaAgregada);
 });
 
 app.MapPut("categoria/update/{id}", async (int id, [FromBody] Categoria categoriaActualizada, ICategoria _categoriaService) =>
@@ -155,7 +155,7 @@ app.MapGet("cliente/{id}", async (int id, ICliente _clienteService) =>
 app.MapPost("cliente/add", async ([FromBody] Cliente nuevoCliente, ICliente _clienteService) =>
 {
     var clienteAgregado = await _clienteService.Add(nuevoCliente);
-    return Results.Created($"/cliente/{clienteAgregado.Idcliente}", clienteAgregado);
+    return Results.Created($"/cliente/{clienteAgregado.IdCliente}", clienteAgregado);
 });
 
 app.MapPut("cliente/update/{id}", async (int id, [FromBody] Cliente clienteActualizado, ICliente _clienteService) =>
@@ -166,7 +166,7 @@ app.MapPut("cliente/update/{id}", async (int id, [FromBody] Cliente clienteActua
     encontrado.RazonSoc = clienteActualizado.RazonSoc;
     encontrado.Domicilio = clienteActualizado.Domicilio;
     encontrado.Condicion = clienteActualizado.Condicion;
-    encontrado.Cuit = clienteActualizado.Cuit;
+    encontrado.CuitCliente = clienteActualizado.CuitCliente;
     encontrado.Borrado = clienteActualizado.Borrado;
 
     var actualizado = await _clienteService.Update(encontrado);
@@ -198,7 +198,7 @@ app.MapGet("factura/{id}", async (int id, IFactura _facturaService) =>
 app.MapPost("factura/add", async ([FromBody] Factura nuevaFactura, IFactura _facturaService) =>
 {
     var facturaAgregada = await _facturaService.Add(nuevaFactura);
-    return Results.Created($"/factura/{facturaAgregada.Idfactura}", facturaAgregada);
+    return Results.Created($"/factura/{facturaAgregada.IdFactura}", facturaAgregada);
 });
 
 app.MapPut("factura/update/{id}", async (int id, [FromBody] Factura facturaActualizada, IFactura _facturaService) =>
@@ -206,8 +206,8 @@ app.MapPut("factura/update/{id}", async (int id, [FromBody] Factura facturaActua
     var encontrado = await _facturaService.GetId(id);
     if (encontrado is null) return Results.NotFound();
 
-    encontrado.Usuario = facturaActualizada.Usuario;
-    encontrado.Cliente = facturaActualizada.Cliente;
+    encontrado.CuitUsuario = facturaActualizada.CuitUsuario;
+    encontrado.CuitCliente = facturaActualizada.CuitCliente;
     encontrado.Cargas = facturaActualizada.Cargas;
     encontrado.Cuit = facturaActualizada.Cuit;
     encontrado.Borrado = facturaActualizada.Borrado;
@@ -241,7 +241,7 @@ app.MapGet("gasto/{id}", async (int id, IGasto _gastoService) =>
 app.MapPost("gasto/add", async ([FromBody] Gasto nuevoGasto, IGasto _gastoService) =>
 {
     var gastoAgregado = await _gastoService.Add(nuevoGasto);
-    return Results.Created($"/gasto/{gastoAgregado.Idgasto}", gastoAgregado);
+    return Results.Created($"/gasto/{gastoAgregado.IdGasto}", gastoAgregado);
 });
 
 app.MapPut("gasto/update/{id}", async (int id, [FromBody] Gasto gastoActualizado, IGasto _gastoService) =>
@@ -285,7 +285,7 @@ app.MapGet("usuario/{id}", async (int id, IUsuario _usuarioService) =>
 app.MapPost("usuario/add", async ([FromBody] Usuario nuevoUsuario, IUsuario _usuarioService) =>
 {
     var usuarioAgregado = await _usuarioService.Add(nuevoUsuario);
-    return Results.Created($"/usuario/{usuarioAgregado.Idusuario}", usuarioAgregado);
+    return Results.Created($"/usuario/{usuarioAgregado.IdUsuario}", usuarioAgregado);
 });
 
 app.MapPut("usuario/update/{id}", async (int id, [FromBody] Usuario usuarioActualizado, IUsuario _usuarioService) =>
@@ -337,7 +337,7 @@ app.MapGet("viaje/{id}", async (int id, IViaje _viajeService) =>
 app.MapPost("viaje/add", async ([FromBody] Viaje modelo, IViaje _viajeService) =>
 {
     var viaje = await _viajeService.Add(modelo);
-    return Results.Created($"/viaje/{viaje.Idviaje}", viaje);
+    return Results.Created($"/viaje/{viaje.IdViaje}", viaje);
 });
 
 app.MapPut("viaje/update/{id}", async (int id, [FromBody] Viaje modelo, IViaje _viajeService) =>

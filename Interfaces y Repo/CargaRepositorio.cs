@@ -35,7 +35,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Carga carga = await _dbContext.Cargas.FindAsync(modelo.Idcarga);
+                Carga carga = await _dbContext.Cargas.FindAsync(modelo.IdCarga);
                 if (carga == null)
                 {
                     return false;
@@ -51,7 +51,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Carga carga = await _dbContext.Cargas.FindAsync(modelo.Idcarga);
+                Carga carga = await _dbContext.Cargas.FindAsync(modelo.IdCarga);
                 if (carga == null)
                 {
                     return false;

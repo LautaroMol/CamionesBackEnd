@@ -33,7 +33,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Viaje viaje = await _dbContext.Viajes.FindAsync(modelo.Idviaje);
+                Viaje viaje = await _dbContext.Viajes.FindAsync(modelo.IdViaje);
                 if (viaje == null)
                 {
                     return false;
@@ -48,7 +48,7 @@ namespace API_Camiones.Interfaces_y_Repo
         {
             try
             {
-                Viaje viaje = await _dbContext.Viajes.FindAsync(modelo.Idviaje);
+                Viaje viaje = await _dbContext.Viajes.FindAsync(modelo.IdViaje);
                 if (viaje == null)
                 {
                     return false;

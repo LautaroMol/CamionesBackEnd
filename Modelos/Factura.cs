@@ -7,11 +7,11 @@ namespace API_Camiones.Modelos
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 1)]
-        public int Idfactura { get; set; }
+        public int IdFactura { get; set; }
         [Required]
-        public int Usuario { get; set; }
+        public int CuitUsuario { get; set; }
         [Required]
-        public int Cliente { get; set; }
+        public int CuitCliente { get; set; }
         [Required]
         public List<int> Cargas { get; set; }
         [Required]

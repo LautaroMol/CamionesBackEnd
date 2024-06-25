@@ -47,7 +47,7 @@ namespace API_Camiones.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategoria(int id, Categoria categoria)
         {
-            if (id != categoria.Idcategoria)
+            if (id != categoria.IdCategoria)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace API_Camiones.Controllers
             _context.Categorias.Add(categoria);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategoria", new { id = categoria.Idcategoria }, categoria);
+            return CreatedAtAction("GetCategoria", new { id = categoria.IdCategoria }, categoria);
         }
 
         // DELETE: api/Categorias/5
@@ -102,7 +102,7 @@ namespace API_Camiones.Controllers
 
         private bool CategoriaExists(int id)
         {
-            return _context.Categorias.Any(e => e.Idcategoria == id);
+            return _context.Categorias.Any(e => e.IdCategoria == id);
         }
     }
 }
