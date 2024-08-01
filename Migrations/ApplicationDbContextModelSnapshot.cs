@@ -22,13 +22,44 @@ namespace API_Camiones.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("API_Camiones.Modelos.Carga", b =>
+            modelBuilder.Entity("API_Camiones.Modelos.Amortizacion", b =>
                 {
-                    b.Property<int>("Idcarga")
+                    b.Property<int>("IdAmortizacion")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAmortizacion"));
+
+                    b.Property<string>("Objetivo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Periodo")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idcarga"));
+                    b.Property<int>("Plazo")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Porcentaje")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Recaudado")
+                        .HasColumnType("real");
+
+                    b.HasKey("IdAmortizacion");
+
+                    b.ToTable("Amortizacion");
+                });
+
+            modelBuilder.Entity("API_Camiones.Modelos.Carga", b =>
+                {
+                    b.Property<int>("IdCarga")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCarga"));
 
                     b.Property<double>("Bonif")
                         .HasColumnType("float");
@@ -63,18 +94,19 @@ namespace API_Camiones.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idcarga");
+                    b.HasKey("IdCarga");
 
                     b.ToTable("Cargas");
                 });
 
             modelBuilder.Entity("API_Camiones.Modelos.Categoria", b =>
                 {
-                    b.Property<int>("Idcategoria")
+                    b.Property<int>("IdCategoria")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idcategoria"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategoria"));
 
                     b.Property<bool?>("Borrado")
                         .HasColumnType("bit");
@@ -83,19 +115,19 @@ namespace API_Camiones.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idcategoria");
+                    b.HasKey("IdCategoria");
 
                     b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("API_Camiones.Modelos.Cliente", b =>
                 {
-                    b.Property<int>("Idcliente")
+                    b.Property<int>("IdCliente")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idcliente"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCliente"));
 
                     b.Property<bool?>("Borrado")
                         .HasColumnType("bit");
@@ -104,7 +136,7 @@ namespace API_Camiones.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Cuit")
+                    b.Property<string>("CuitCliente")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -116,18 +148,19 @@ namespace API_Camiones.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idcliente");
+                    b.HasKey("IdCliente");
 
                     b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("API_Camiones.Modelos.Factura", b =>
                 {
-                    b.Property<int>("Idfactura")
+                    b.Property<int>("IdFactura")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idfactura"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdFactura"));
 
                     b.Property<bool?>("Borrado")
                         .HasColumnType("bit");
@@ -136,28 +169,29 @@ namespace API_Camiones.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Cliente")
-                        .HasColumnType("int");
-
                     b.Property<string>("Cuit")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Usuario")
+                    b.Property<int>("CuitCliente")
                         .HasColumnType("int");
 
-                    b.HasKey("Idfactura");
+                    b.Property<int>("CuitUsuario")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdFactura");
 
                     b.ToTable("Facturas");
                 });
 
             modelBuilder.Entity("API_Camiones.Modelos.Gasto", b =>
                 {
-                    b.Property<int>("Idgasto")
+                    b.Property<int>("IdGasto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idgasto"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdGasto"));
 
                     b.Property<bool?>("Borrado")
                         .HasColumnType("bit");
@@ -179,18 +213,64 @@ namespace API_Camiones.Migrations
                     b.Property<int>("Viaje")
                         .HasColumnType("int");
 
-                    b.HasKey("Idgasto");
+                    b.HasKey("IdGasto");
 
                     b.ToTable("Gastos");
                 });
 
-            modelBuilder.Entity("API_Camiones.Modelos.Usuario", b =>
+            modelBuilder.Entity("API_Camiones.Modelos.Unidad", b =>
                 {
-                    b.Property<int>("Idusuario")
+                    b.Property<int>("idUnidad")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUnidad"));
+
+                    b.Property<DateTime>("Aceite")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Amortizacion")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idusuario"));
+                    b.Property<string>("EstadoRueda")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KmAceite")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ruedas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Valoracion")
+                        .HasColumnType("real");
+
+                    b.HasKey("idUnidad");
+
+                    b.ToTable("Unidades");
+                });
+
+            modelBuilder.Entity("API_Camiones.Modelos.Usuario", b =>
+                {
+                    b.Property<int>("IdUsuario")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
 
                     b.Property<bool?>("Borrado")
                         .HasColumnType("bit");
@@ -214,18 +294,19 @@ namespace API_Camiones.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idusuario");
+                    b.HasKey("IdUsuario");
 
                     b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("API_Camiones.Modelos.Viaje", b =>
                 {
-                    b.Property<int>("Idviaje")
+                    b.Property<int>("IdViaje")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idviaje"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdViaje"));
 
                     b.Property<bool?>("Borrado")
                         .IsRequired()
@@ -258,7 +339,7 @@ namespace API_Camiones.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Idviaje");
+                    b.HasKey("IdViaje");
 
                     b.ToTable("Viajes");
                 });

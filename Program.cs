@@ -23,6 +23,8 @@ builder.Services.AddScoped<IFactura, FacturaRepositorio>();
 builder.Services.AddScoped<IGasto, GastoRepositorio>();
 builder.Services.AddScoped<IUsuario, UsuarioRepositorio>();
 builder.Services.AddScoped<IViaje, ViajeRepositorio>();
+builder.Services.AddScoped<IAmortizacion, AmortizacionRepositorio>();
+builder.Services.AddScoped<IUnidad, UnidadRepositorio>();
 
 var afipConfig = builder.Configuration.GetSection("AfipConfig");
 var certificadoPath = afipConfig["CertificadoPath"];
@@ -378,6 +380,95 @@ app.MapDelete("viaje/delete/{id}", async (int id, IViaje _viajeService) =>
 });
 
 #endregion // Viaje
+#region Unidad
+app.MapGet("unidad/lista", async (IUnidad _unidadService) =>
+{
+    var listaUnidades = await _unidadService.GetList();
+    return listaUnidades.Count > 0 ? Results.Ok(listaUnidades) : Results.NotFound();
+});
+
+app.MapGet("unidad/{id}", async (int id, IUnidad _unidadService) =>
+{
+    var unidad = await _unidadService.GetId(id);
+    return unidad != null ? Results.Ok(unidad) : Results.NotFound();
+});
+
+app.MapPost("unidad/add", async ([FromBody] Unidad nuevaUnidad, IUnidad _unidadService) =>
+{
+    var unidadAgregada = await _unidadService.Add(nuevaUnidad);
+    return Results.Created($"/unidad/{unidadAgregada.IdUnidad}", unidadAgregada);
+});
+
+app.MapPut("unidad/update/{id}", async (int id, [FromBody] Unidad unidadActualizada, IUnidad _unidadService) =>
+{
+    var encontrada = await _unidadService.GetId(id);
+    if (encontrada is null) return Results.NotFound();
+
+    encontrada.Marca = unidadActualizada.Marca;
+    encontrada.Modelo = unidadActualizada.Modelo;
+    encontrada.IdUsuario = unidadActualizada.IdUsuario;
+    encontrada.Valoracion = unidadActualizada.Valoracion;
+    encontrada.Amortizacion = unidadActualizada.Amortizacion;
+    encontrada.Ruedas = unidadActualizada.Ruedas;
+    encontrada.EstadoRueda = unidadActualizada.EstadoRueda;
+    encontrada.Aceite = unidadActualizada.Aceite;
+    encontrada.KmAceite = unidadActualizada.KmAceite;
+
+    var actualizado = await _unidadService.Update(encontrada);
+    return actualizado ? Results.Ok(encontrada) : Results.StatusCode(StatusCodes.Status500InternalServerError);
+});
+
+app.MapDelete("unidad/delete/{id}", async (int id, IUnidad _unidadService) =>
+{
+    var unidad = await _unidadService.GetId(id);
+    if (unidad == null) return Results.NotFound();
+    var eliminado = await _unidadService.Delete(unidad);
+    return eliminado ? Results.Ok() : Results.StatusCode(StatusCodes.Status500InternalServerError);
+});
+#endregion
+#region Amortizacion
+app.MapGet("amortizacion/lista", async (IAmortizacion _amortizacionService) =>
+{
+    var listaAmortizaciones = await _amortizacionService.GetList();
+    return listaAmortizaciones.Count > 0 ? Results.Ok(listaAmortizaciones) : Results.NotFound();
+});
+
+app.MapGet("amortizacion/{id}", async (int id, IAmortizacion _amortizacionService) =>
+{
+    var amortizacion = await _amortizacionService.GetId(id);
+    return amortizacion != null ? Results.Ok(amortizacion) : Results.NotFound();
+});
+
+app.MapPost("amortizacion/add", async ([FromBody] Amortizacion nuevaAmortizacion, IAmortizacion _amortizacionService) =>
+{
+    var amortizacionAgregada = await _amortizacionService.Add(nuevaAmortizacion);
+    return Results.Created($"/amortizacion/{amortizacionAgregada.IdAmortizacion}", amortizacionAgregada);
+});
+
+app.MapPut("amortizacion/update/{id}", async (int id, [FromBody] Amortizacion amortizacionActualizada, IAmortizacion _amortizacionService) =>
+{
+    var encontrada = await _amortizacionService.GetId(id);
+    if (encontrada is null) return Results.NotFound();
+
+    encontrada.Plazo = amortizacionActualizada.Plazo;
+    encontrada.Periodo = amortizacionActualizada.Periodo;
+    encontrada.Objetivo = amortizacionActualizada.Objetivo;
+    encontrada.Porcentaje = amortizacionActualizada.Porcentaje;
+    encontrada.Recaudado = amortizacionActualizada.Recaudado;
+
+    var actualizado = await _amortizacionService.Update(encontrada);
+    return actualizado ? Results.Ok(encontrada) : Results.StatusCode(StatusCodes.Status500InternalServerError);
+});
+
+app.MapDelete("amortizacion/delete/{id}", async (int id, IAmortizacion _amortizacionService) =>
+{
+    var amortizacion = await _amortizacionService.GetId(id);
+    if (amortizacion == null) return Results.NotFound();
+    var eliminado = await _amortizacionService.Delete(amortizacion);
+    return eliminado ? Results.Ok() : Results.StatusCode(StatusCodes.Status500InternalServerError);
+});
+
+#endregion
 
 app.UseCors("politicaNueva"); 
 app.MapControllers();
