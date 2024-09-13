@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Camiones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240912205905_nuevaDB")]
-    partial class nuevaDB
+    [Migration("20240913114312_b")]
+    partial class b
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -335,7 +335,6 @@ namespace API_Camiones.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gastos")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Inicio")

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API_Camiones.Migrations
 {
     /// <inheritdoc />
-    public partial class nuevaDB : Migration
+    public partial class b : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -163,7 +163,7 @@ namespace API_Camiones.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Inicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Final = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gastos = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gastos = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fecha = table.Column<DateOnly>(type: "date", nullable: false),
                     Cp = table.Column<int>(type: "int", nullable: false),
                     Facturado = table.Column<bool>(type: "bit", nullable: false),

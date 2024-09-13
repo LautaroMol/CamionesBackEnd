@@ -332,7 +332,6 @@ namespace API_Camiones.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gastos")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Inicio")
