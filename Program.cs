@@ -374,6 +374,7 @@ app.MapPut("viaje/update/{id}", async (int id, [FromBody] Viaje modelo, IViaje _
     encontrado.CuitUsuario = modelo.CuitUsuario;
     encontrado.Distancia = modelo.Distancia;
     encontrado.Borrado = modelo.Borrado;
+    encontrado.TotalFacturado = modelo.TotalFacturado;
 
     var success = await _viajeService.Update(encontrado);
     if (success)
