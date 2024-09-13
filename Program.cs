@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ICarga, CargaRepositorio>();
 builder.Services.AddScoped<ICategoria, CategoriaRepositorio>();
@@ -36,12 +36,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy("politicaNueva", builder =>
     {
         builder
-            .WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials();
+            .AllowAnyOrigin();
     });
 });
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 
 var app = builder.Build();
 
@@ -51,15 +53,30 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
 #region Carga Endpoints
 app.MapGet("carga/lista", async (ICarga _cargaService) =>
 {
-    var listaCarga = await _cargaService.GetList();
-    return listaCarga.Count > 0 ? Results.Ok(listaCarga) : Results.NotFound();
+    try
+    {
+        var listaCarga = await _cargaService.GetList();
+        return listaCarga.Count > 0 ? Results.Ok(listaCarga) : Results.NotFound();
+    }
+    catch (Exception ex)
+    {
+        // Registrar el error para depuración
+        Console.WriteLine($"Error al obtener la lista de cargas: {ex.Message}");
+        Console.WriteLine($"Detalle del error: {ex.StackTrace}");
+
+        // Retornar un error 500 con detalles adicionales
+        return Results.Problem("Se ha producido un error al procesar la solicitud. Consulte el registro del servidor para obtener más detalles.");
+    }
 });
+
 
 app.MapGet("carga/{id}", async (int id, ICarga _cargaService) =>
 {

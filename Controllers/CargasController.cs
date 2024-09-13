@@ -25,7 +25,16 @@ namespace API_Camiones.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Carga>>> GetCargas()
         {
-            return await _context.Cargas.ToListAsync();
+            try {
+                return await _context.Cargas.ToListAsync();
+            }
+            catch(Exception ex) {
+             // Registrar el error
+                Console.WriteLine(ex.Message);
+                // Devolver un error 500 con detalles adicionales
+                return StatusCode(500, "Ocurrió un error en el servidor: " + ex.Message);
+            }
+            
         }
 
         // GET: api/Cargas/5

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API_Camiones.Migrations
 {
     /// <inheritdoc />
-    public partial class DB : Migration
+    public partial class nuevaDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -120,7 +120,7 @@ namespace API_Camiones.Migrations
                 name: "Unidades",
                 columns: table => new
                 {
-                    idUnidad = table.Column<int>(type: "int", nullable: false)
+                    IdUnidad = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -134,7 +134,7 @@ namespace API_Camiones.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Unidades", x => x.idUnidad);
+                    table.PrimaryKey("PK_Unidades", x => x.IdUnidad);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,8 +168,9 @@ namespace API_Camiones.Migrations
                     Cp = table.Column<int>(type: "int", nullable: false),
                     Facturado = table.Column<bool>(type: "bit", nullable: false),
                     CuitUsuario = table.Column<int>(type: "int", nullable: false),
-                    Distancia = table.Column<int>(type: "int", nullable: false),
-                    Borrado = table.Column<bool>(type: "bit", nullable: false)
+                    Distancia = table.Column<float>(type: "real", nullable: false),
+                    Borrado = table.Column<bool>(type: "bit", nullable: false),
+                    TotalFacturado = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

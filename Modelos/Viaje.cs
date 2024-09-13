@@ -21,8 +21,9 @@ namespace API_Camiones.Modelos
         public bool Facturado { get; set; }
         public int CuitUsuario { get; set; }
         [Required]
-        public int Distancia { get; set; }
+        public float Distancia { get; set; }
         [Required]
         public bool? Borrado { get; set; }
+        public float TotalFacturado { get; set; }
     }
 }

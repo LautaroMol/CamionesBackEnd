@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Camiones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240801010332_DB")]
-    partial class DB
+    [Migration("20240912205905_nuevaDB")]
+    partial class nuevaDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -223,12 +223,12 @@ namespace API_Camiones.Migrations
 
             modelBuilder.Entity("API_Camiones.Modelos.Unidad", b =>
                 {
-                    b.Property<int>("idUnidad")
+                    b.Property<int>("IdUnidad")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idUnidad"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUnidad"));
 
                     b.Property<DateTime>("Aceite")
                         .HasColumnType("datetime2");
@@ -261,7 +261,7 @@ namespace API_Camiones.Migrations
                     b.Property<float>("Valoracion")
                         .HasColumnType("real");
 
-                    b.HasKey("idUnidad");
+                    b.HasKey("IdUnidad");
 
                     b.ToTable("Unidades");
                 });
@@ -321,8 +321,8 @@ namespace API_Camiones.Migrations
                     b.Property<int>("CuitUsuario")
                         .HasColumnType("int");
 
-                    b.Property<int>("Distancia")
-                        .HasColumnType("int");
+                    b.Property<float>("Distancia")
+                        .HasColumnType("real");
 
                     b.Property<bool>("Facturado")
                         .HasColumnType("bit");
@@ -341,6 +341,9 @@ namespace API_Camiones.Migrations
                     b.Property<string>("Inicio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("TotalFacturado")
+                        .HasColumnType("real");
 
                     b.HasKey("IdViaje");
 
