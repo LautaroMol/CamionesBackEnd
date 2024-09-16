@@ -12,7 +12,7 @@ namespace API_Camiones.Modelos
         public string Inicio { get; set; } = null!;
         [Required]
         public string Final { get; set; } = null!;
-        public List<int>? Gastos { get; set; }
+        public List<int> Gastos { get; set; } = new List<int>();
         [Required]
         public DateOnly Fecha { get; set; }
         [Required]
