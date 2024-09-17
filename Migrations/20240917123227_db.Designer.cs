@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Camiones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240916131618_db")]
+    [Migration("20240917123227_db")]
     partial class db
     {
         /// <inheritdoc />
