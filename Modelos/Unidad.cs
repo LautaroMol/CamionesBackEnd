@@ -19,13 +19,13 @@ namespace API_Camiones.Modelos
         [Required]
         public int Amortizacion { get; set; }
         [Required]
-        public List<float> Ruedas { get; set; }
+        public List<int> Ruedas { get; set; }
         [Required]
         public List<float> EstadoRueda { get; set; }
         [Required]
         public DateTime Aceite {  get; set; }
         [Required]
-        public int KmAceite { get; set; }
+        public float KmAceite { get; set; }
 
     }
 }
