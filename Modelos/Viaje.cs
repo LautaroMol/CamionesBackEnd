@@ -8,21 +8,28 @@ namespace API_Camiones.Modelos
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key, Column(Order = 1)]
         public int IdViaje { get; set; }
+
         [Required]
         public string Inicio { get; set; } = null!;
+
         [Required]
         public string Final { get; set; } = null!;
+
         public List<int> Gastos { get; set; } = new List<int>();
+
         [Required]
         public DateOnly Fecha { get; set; }
-        [Required]
-        public int Cp { get; set; }
+        public string? Cp { get; set; }
+
         public bool Facturado { get; set; }
+
         public int CuitUsuario { get; set; }
+
         [Required]
         public float Distancia { get; set; }
-        [Required]
+
         public bool? Borrado { get; set; }
+
         public float TotalFacturado { get; set; }
     }
 }

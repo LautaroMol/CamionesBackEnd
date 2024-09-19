@@ -25,6 +25,7 @@ builder.Services.AddScoped<IUsuario, UsuarioRepositorio>();
 builder.Services.AddScoped<IViaje, ViajeRepositorio>();
 builder.Services.AddScoped<IAmortizacion, AmortizacionRepositorio>();
 builder.Services.AddScoped<IUnidad, UnidadRepositorio>();
+builder.Services.AddControllers();
 
 var afipConfig = builder.Configuration.GetSection("AfipConfig");
 var certificadoPath = afipConfig["CertificadoPath"];

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Camiones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240917124343_DB")]
-    partial class DB
+    [Migration("20240919185226_db")]
+    partial class db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,8 +243,8 @@ namespace API_Camiones.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<int>("KmAceite")
-                        .HasColumnType("int");
+                    b.Property<float>("KmAceite")
+                        .HasColumnType("real");
 
                     b.Property<string>("Marca")
                         .IsRequired()
@@ -312,11 +312,10 @@ namespace API_Camiones.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdViaje"));
 
                     b.Property<bool?>("Borrado")
-                        .IsRequired()
                         .HasColumnType("bit");
 
-                    b.Property<int>("Cp")
-                        .HasColumnType("int");
+                    b.Property<string>("Cp")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CuitUsuario")
                         .HasColumnType("int");

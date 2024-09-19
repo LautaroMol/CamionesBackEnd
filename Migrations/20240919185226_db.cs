@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API_Camiones.Migrations
 {
     /// <inheritdoc />
-    public partial class DB : Migration
+    public partial class db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -130,7 +130,7 @@ namespace API_Camiones.Migrations
                     Ruedas = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EstadoRueda = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Aceite = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    KmAceite = table.Column<int>(type: "int", nullable: false)
+                    KmAceite = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,11 +165,11 @@ namespace API_Camiones.Migrations
                     Final = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gastos = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fecha = table.Column<DateOnly>(type: "date", nullable: false),
-                    Cp = table.Column<int>(type: "int", nullable: false),
+                    Cp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Facturado = table.Column<bool>(type: "bit", nullable: false),
                     CuitUsuario = table.Column<int>(type: "int", nullable: false),
                     Distancia = table.Column<float>(type: "real", nullable: false),
-                    Borrado = table.Column<bool>(type: "bit", nullable: false),
+                    Borrado = table.Column<bool>(type: "bit", nullable: true),
                     TotalFacturado = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>

@@ -240,8 +240,8 @@ namespace API_Camiones.Migrations
                     b.Property<int>("IdUsuario")
                         .HasColumnType("int");
 
-                    b.Property<int>("KmAceite")
-                        .HasColumnType("int");
+                    b.Property<float>("KmAceite")
+                        .HasColumnType("real");
 
                     b.Property<string>("Marca")
                         .IsRequired()
@@ -309,11 +309,10 @@ namespace API_Camiones.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdViaje"));
 
                     b.Property<bool?>("Borrado")
-                        .IsRequired()
                         .HasColumnType("bit");
 
-                    b.Property<int>("Cp")
-                        .HasColumnType("int");
+                    b.Property<string>("Cp")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CuitUsuario")
                         .HasColumnType("int");
