@@ -15,10 +15,11 @@ namespace API_Camiones.Controllers
     public class ViajesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
-        public ViajesController(ApplicationDbContext context)
+        private IWebHostEnvironment _env;
+        public ViajesController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: api/Viajes
@@ -42,37 +43,25 @@ namespace API_Camiones.Controllers
             return viaje;
         }
 
-        [HttpGet("get/{fileName}")]
-        public IActionResult GetPdfFile(string fileName)
+        [HttpGet("PDFs")]
+        public IActionResult Pdf(string ruta)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "camiones", "PDFs", fileName);
-
-            if (!System.IO.File.Exists(filePath))
+            string FilePath = ruta;
+            if (System.IO.File.Exists(FilePath))
             {
-                return NotFound();
+                FileStream fs = new FileStream(ruta, FileMode.Open);
+                return File(fs, "application/pdf", Path.GetFileName(ruta)); 
             }
-
-            var pdfBytes = System.IO.File.ReadAllBytes(filePath);
-            return File(pdfBytes, "application/pdf", fileName);
+            else
+            {
+                return Content("No encontrado.");
+            }
         }
-
 
         // POST: api/Viajes/addPDF
         [HttpPost("addPDF")]
         public async Task<IActionResult> AddViaje([FromForm] Viaje viaje, IFormFile? archivo)
         {
-            // Log de los datos del viaje recibidos
-            Console.WriteLine("Datos del viaje recibidos:");
-            Console.WriteLine($"Inicio: {viaje.Inicio}");
-            Console.WriteLine($"Final: {viaje.Final}");
-            Console.WriteLine($"Fecha: {viaje.Fecha}");
-            Console.WriteLine($"Distancia: {viaje.Distancia}");
-            Console.WriteLine($"Cp: {viaje.Cp}");
-            Console.WriteLine($"Facturado: {viaje.Facturado}");
-            Console.WriteLine($"CuitUsuario: {viaje.CuitUsuario}");
-            Console.WriteLine($"TotalFacturado: {viaje.TotalFacturado}");
-            Console.WriteLine($"Borrado: {viaje.Borrado}");
-
             // Verificar si el objeto viaje es null
             if (viaje == null)
             {
