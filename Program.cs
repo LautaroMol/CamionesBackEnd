@@ -472,8 +472,10 @@ app.MapPut("amortizacion/update/{id}", async (int id, [FromBody] Amortizacion am
     encontrada.Plazo = amortizacionActualizada.Plazo;
     encontrada.Periodo = amortizacionActualizada.Periodo;
     encontrada.Objetivo = amortizacionActualizada.Objetivo;
+    encontrada.ObjetivoAnual = amortizacionActualizada.ObjetivoAnual;
     encontrada.Porcentaje = amortizacionActualizada.Porcentaje;
     encontrada.Recaudado = amortizacionActualizada.Recaudado;
+    encontrada.FechaInicio = amortizacionActualizada.FechaInicio;
 
     var actualizado = await _amortizacionService.Update(encontrada);
     return actualizado ? Results.Ok(encontrada) : Results.StatusCode(StatusCodes.Status500InternalServerError);

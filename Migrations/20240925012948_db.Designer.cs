@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_Camiones.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240919185226_db")]
+    [Migration("20240925012948_db")]
     partial class db
     {
         /// <inheritdoc />
@@ -34,9 +34,14 @@ namespace API_Camiones.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAmortizacion"));
 
-                    b.Property<string>("Objetivo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("Objetivo")
+                        .HasColumnType("real");
+
+                    b.Property<float>("ObjetivoAnual")
+                        .HasColumnType("real");
 
                     b.Property<int>("Periodo")
                         .HasColumnType("int");

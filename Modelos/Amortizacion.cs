@@ -13,10 +13,14 @@ namespace API_Camiones.Modelos
         [Required]
         public int Periodo { get; set; }
         [Required]
-        public string Objetivo { get; set; }
+        public float Objetivo { get; set; }
+        [Required]
+        public float ObjetivoAnual { get; set; }
         [Required]
         public float Porcentaje { get; set; }
         [Required]
         public float Recaudado { get; set; }
+        [Required]
+        public DateTime FechaInicio { get; set; }
     }
 }

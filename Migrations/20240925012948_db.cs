@@ -19,9 +19,11 @@ namespace API_Camiones.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Plazo = table.Column<int>(type: "int", nullable: false),
                     Periodo = table.Column<int>(type: "int", nullable: false),
-                    Objetivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Objetivo = table.Column<float>(type: "real", nullable: false),
+                    ObjetivoAnual = table.Column<float>(type: "real", nullable: false),
                     Porcentaje = table.Column<float>(type: "real", nullable: false),
-                    Recaudado = table.Column<float>(type: "real", nullable: false)
+                    Recaudado = table.Column<float>(type: "real", nullable: false),
+                    FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
