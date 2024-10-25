@@ -20,5 +20,6 @@ namespace API_Camiones.Data
         public DbSet<Viaje> Viajes { get; set; }
         public DbSet<Amortizacion> Amortizacion { get; set; } = default!;
         public DbSet<Unidad> Unidades { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

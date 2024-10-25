@@ -4,8 +4,12 @@ using API_Camiones.Interfaces;
 using API_Camiones.Interfaces_y_Repo;
 using API_Camiones.Modelos;
 using API_Camiones.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +29,28 @@ builder.Services.AddScoped<IUsuario, UsuarioRepositorio>();
 builder.Services.AddScoped<IViaje, ViajeRepositorio>();
 builder.Services.AddScoped<IAmortizacion, AmortizacionRepositorio>();
 builder.Services.AddScoped<IUnidad, UnidadRepositorio>();
+builder.Services.AddSingleton<Utilidades>();
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(config =>
+{
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = true;
+    config.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]!))
+    };
+});
+
+
 builder.Services.AddControllers();
 
 var afipConfig = builder.Configuration.GetSection("AfipConfig");
@@ -57,7 +83,10 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 #region Carga Endpoints
 app.MapGet("carga/lista", async (ICarga _cargaService) =>
@@ -446,6 +475,7 @@ app.MapDelete("unidad/delete/{id}", async (int id, IUnidad _unidadService) =>
 });
 #endregion
 #region Amortizacion
+[Authorize]
 app.MapGet("amortizacion/lista", async (IAmortizacion _amortizacionService) =>
 {
     var listaAmortizaciones = await _amortizacionService.GetList();
