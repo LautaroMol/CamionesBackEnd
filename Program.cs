@@ -475,7 +475,6 @@ app.MapDelete("unidad/delete/{id}", async (int id, IUnidad _unidadService) =>
 });
 #endregion
 #region Amortizacion
-[Authorize]
 app.MapGet("amortizacion/lista", async (IAmortizacion _amortizacionService) =>
 {
     var listaAmortizaciones = await _amortizacionService.GetList();
