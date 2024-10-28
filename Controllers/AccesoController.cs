@@ -35,9 +35,9 @@ namespace API_Camiones.Controllers
             await _dbContext.SaveChangesAsync();
 
             if (modelUser.IdUser != 0)
-                return StatusCode(StatusCodes.Status200OK, new { isSucces = true });
+                return StatusCode(StatusCodes.Status200OK, new { isSuccess = true });
             else
-                return StatusCode(StatusCodes.Status200OK, new { isSucces = false });
+                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
         }
         [HttpPost]
         [Route("Login")]
@@ -52,7 +52,13 @@ namespace API_Camiones.Controllers
             else
                 return StatusCode(StatusCodes.Status200OK, new { isSuccess = true, token = _utilidades.generateJWT(userFound) });
         }
-
+        [HttpGet]
+        [Route("ValidarToken")]
+        public IActionResult ValidateToken([FromQuery]string token)
+        {
+            bool respuesta = _utilidades.validateToken(token);
+            return StatusCode(StatusCodes.Status200OK, new { isSuccess = respuesta });
+        }
 
 
     }

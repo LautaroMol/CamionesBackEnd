@@ -70,6 +70,12 @@ builder.Services.AddCors(options =>
 });
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy =>
+        policy.RequireAuthenticatedUser()
+              .RequireRole("Admin")); 
+});
 
 
 var app = builder.Build();

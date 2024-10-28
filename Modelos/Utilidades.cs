@@ -52,6 +52,35 @@ namespace API_Camiones.Modelos
 
         }
 
+        public bool validateToken(string token)
+        {
+            var claimsPrincipal = new ClaimsPrincipal();
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+                IssuerSigningKey = new SymmetricSecurityKey
+                (Encoding.UTF8.GetBytes(_configuration["Jwt:key"]!))
+            };
+
+            try
+            {
+                claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                return true;
+            }catch (SecurityTokenInvalidSignatureException)
+            {
+                //firma invalida
+                return false;
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
+        }
     
     
     }
