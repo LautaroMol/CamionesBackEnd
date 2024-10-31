@@ -22,8 +22,16 @@ namespace API_Camiones.Controllers
         }
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Regoster(UserDTO obj)
+        public async Task<IActionResult> Register(UserDTO obj)
         {
+            // Verificar si el correo ya está registrado
+            var existingUser = await _dbContext.Users.FirstOrDefaultAsync(u => u.Correo == obj.Correo);
+
+            if (existingUser != null)
+            {
+                return StatusCode(StatusCodes.Status409Conflict, new { isSuccess = false, message = "El correo ya está registrado" });
+            }
+
             var modelUser = new User
             {
                 Nombre = obj.Nombre,
@@ -37,8 +45,9 @@ namespace API_Camiones.Controllers
             if (modelUser.IdUser != 0)
                 return StatusCode(StatusCodes.Status200OK, new { isSuccess = true });
             else
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { isSuccess = false, message = "Error al registrar el usuario" });
         }
+
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login(LoginDTO obj)
