@@ -69,6 +69,17 @@ namespace API_Camiones.Controllers
             return StatusCode(StatusCodes.Status200OK, new { isSuccess = respuesta });
         }
 
+        [HttpGet]
+        [Route("GetUser")]
+        public async Task<ActionResult<User>> GetUser()
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync();
+            if(user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
 
     }
 }

@@ -45,7 +45,7 @@ namespace API_Camiones.Modelos
             //creation of token details
             var jwetConfig = new JwtSecurityToken(
                 claims: userClaims,
-                expires: DateTime.UtcNow.AddMinutes(10),
+                expires: DateTime.UtcNow.AddDays(30),
                 signingCredentials: credentials
                 );
             return new JwtSecurityTokenHandler().WriteToken(jwetConfig);

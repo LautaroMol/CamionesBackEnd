@@ -23,6 +23,8 @@ namespace API_Camiones.Modelos
 
         public bool Facturado { get; set; }
 
+        public bool Amortizado { get; set; }
+
         public int CuitUsuario { get; set; }
 
         [Required]
